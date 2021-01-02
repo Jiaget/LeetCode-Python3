@@ -1,6 +1,9 @@
 from typing import List
 
 if __name__ == '__main__':
+    # 双指针向中间聚拢，遇到两个字母相同的，判定两字母中间是否构成回文。
+    # 嵌套了三层循环（估计第三层循环增加了右指针的移动，时间复杂度应该是O(n3)而非O（n2））
+    # 效率和暴力差不太多。
     def longestPalindrome(s: str) -> str:
         res = ""
         n = len(s)
