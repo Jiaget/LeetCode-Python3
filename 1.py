@@ -11,6 +11,16 @@ class ListNode(object):
 
 if __name__ == '__main__':
 
+    def fib(n: int) -> int:
+        if n < 2:
+            return n
+        a, b = 0, 1
+        for i in range(2, n + 1):
+            temp = b
+            b = a + b
+            a = temp
+        return b
+    print(fib(4))
     # 滑动窗口最大值（优化） 单调队列 使用双端队列deque实现。
     # # 使用双端队列是为了1.当队首不在窗口内，弹出。2.在队尾添加元素时，将队尾较小得元素弹出。
     # def maxSlidingWindow(nums: List[int], k: int) -> List[int]:
