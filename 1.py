@@ -1,5 +1,6 @@
 import collections
 import heapq
+import sys
 from typing import List
 
 
@@ -10,17 +11,65 @@ class ListNode(object):
 
 
 if __name__ == '__main__':
+    # 整数反转以及溢出判断
+    def reverse(x: int) -> int:
+        symbol, res = 1, 0
+        if x < 0:
+            symbol = -1
+            x = -x
+        while x != 0:
+            tmp = x % 10
+            newRes = res * 10 + tmp
+            if (newRes - tmp) // 10 != res:
+                return 0
+            res = newRes
+            x = x // 10
+        return res * symbol
+    print(reverse(-12312))
+    # # z字转换
+    # def convert(s: str, numRows: int) -> str:
+    #     if numRows == 1:
+    #         return s
+    #     # 最后将numRows个字符串拼接在一起即可
+    #     res = ["" for _ in range(numRows)]
+    #     # 1正序，-1逆序。 res数组每次遍历到0或者numRows时反向
+    #     i, turn = 0, -1
+    #     for e in s:
+    #         res[i] += s
+    #         if i == 0 or i == numRows - 1:
+    #             turn = -turn
+    #         i += turn
+    #     return "".join(res)
+    # sys.maxsize
 
-    def fib(n: int) -> int:
-        if n < 2:
-            return n
-        a, b = 0, 1
-        for i in range(2, n + 1):
-            temp = b
-            b = a + b
-            a = temp
-        return b
-    print(fib(4))
+
+    # def largeGroupPositions(s: str) -> List[List[int]]:
+    #     i, start, end = 0, 0, 0
+    #     res = list()
+    #     while i < len(s) - 2:
+    #         if s[i] == s[i + 1] and s[i] == s[i + 2]:
+    #             start = i
+    #             i += 3
+    #             while i < len(s) and s[i] == s[i - 1]:
+    #                 i += 1
+    #             end = i - 1
+    #             res.append([start, end])
+    #         else:
+    #             i += 1
+    #     return res
+    # s = "abbxxxxzzy"
+    # print(largeGroupPositions(s))
+
+    # def fib(n: int) -> int:
+    #     if n < 2:
+    #         return n
+    #     a, b = 0, 1
+    #     for i in range(2, n + 1):
+    #         temp = b
+    #         b = a + b
+    #         a = temp
+    #     return b
+    # print(fib(4))
     # 滑动窗口最大值（优化） 单调队列 使用双端队列deque实现。
     # # 使用双端队列是为了1.当队首不在窗口内，弹出。2.在队尾添加元素时，将队尾较小得元素弹出。
     # def maxSlidingWindow(nums: List[int], k: int) -> List[int]:
