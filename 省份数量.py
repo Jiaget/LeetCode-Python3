@@ -7,7 +7,6 @@ if __name__ == '__main__':
         for j in range(len(isConnected)):
             if isConnected[i][j] and not isVisited[j]:
                 DFS(j, isConnected, isVisited)
-        return
 
 
     def findCircleNum(isConnected: List[List[int]]) -> int:
