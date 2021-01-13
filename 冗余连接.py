@@ -1,3 +1,6 @@
+from typing import List
+
+
 class DisjointSet:
     def __init__(self, length):
         self.father = {i: i for i in range(1, length + 1)}
@@ -27,3 +30,17 @@ class DisjointSet:
         xRoot, yRoot = self.find(x), self.find(y)
         if xRoot != yRoot:
             self.father[xRoot] = yRoot
+
+
+if __name__ == '__main__':
+    def findRedundantConnection(edges: List[List[int]]) -> List[int]:
+        # len(edges)是边的个数，由题意可知，传入的图必然有且只有一个环，故而，边数即节点个数。
+        ds = DisjointSet(len(edges))
+        for x, y in edges:
+            if ds.isConnected(x, y):
+                return [x, y]
+            ds.merge(x, y)
+
+    edges = [[1, 2], [1, 3], [2, 3]]
+    print(findRedundantConnection(edges))
+

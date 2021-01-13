@@ -38,8 +38,18 @@ class DisjointSet:
 
 
 if __name__ == '__main__':
-    # 2. DFS做法
-    def smallestStringWithSwaps(s: str, pairs: List[List[int]]) -> str:
+
+    # # 2. DFS做法
+    # def DFS(isVisited, ):
+    #
+    # def smallestStringWithSwaps(s: str, pairs: List[List[int]]) -> str:
+    #     n = len(s)
+    #     graph = [[] for _ in range(n)]
+    #     isVisited = [0] * n
+    #     for x, y in pairs:
+    #         graph[x].append(y)
+    #         graph[y].append(x)
+
 
 
     # # 1. 此题中pairs中所有节点对之间联通起来，是连通性问题，使用并查集
@@ -70,6 +80,6 @@ if __name__ == '__main__':
     #     return "".join(res)
 
 
-    s = "dcab"
-    pairs = [[0,3],[1,2],[0,2]]
-    print(smallestStringWithSwaps(s, pairs))
+    # s = "dcab"
+    # pairs = [[0,3],[1,2],[0,2]]
+    # print(smallestStringWithSwaps(s, pairs))
