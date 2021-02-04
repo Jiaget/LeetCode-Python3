@@ -1,5 +1,6 @@
 from typing import List
-
+# 回溯：
+# 回溯的递归过程中会出现多个支线，在这些支线中会存在成功与失败，回溯要在出现失败的时候回溯到上一个状态。
 if __name__ == '__main__':
     def solveSudoku(board: List[List[str]]) -> None:
         # 使用集合，方便移除已用数字。list的减法只有set()有效
