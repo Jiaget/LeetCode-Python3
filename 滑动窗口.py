@@ -3,23 +3,50 @@ from itertools import accumulate
 from typing import List
 
 if __name__ == '__main__':
+    def subarraysWithKDistinct(A: List[int], K: int) -> int:
+        n = len(A)
+        # for left in range(n):
+        #     right
+        print(A[1:2])
+
+
+    A = [1, 2, 1, 3, 4]
+    K = 3
+    print(subarraysWithKDistinct(A, K))
+    # def maxTurbulenceSize(arr: List[int]) -> int:
+    #     res, n = 2, len(arr)
+    #     if n < 3:
+    #         return n
+    #     count = res
+    #     for mid in range(1, n - 1):
+    #         left, right = mid - 1, mid + 1
+    #         if arr[left] > arr[mid] < arr[right] or arr[left] < arr[mid] > arr[right]:
+    #             count += 1
+    #         else:
+    #             res = max(res, count)
+    #             count = 2
+    #     res = max(res, count)
+    #     return res
+    # arr = [0,8,45,88,48,68,28,55,17,24]
+    # print(maxTurbulenceSize(arr))
+
     # 可获得的最大值https://leetcode-cn.com/problems/maximum-points-you-can-obtain-from-cards/submissions/
     # 由只能从首位拿取可以推得剩下的n - k 个数必然是连续最小值。
     # 即找到最小连续数之和可找到最大值
-    def maxScore(cardPoints: List[int], k: int) -> int:
-        n = len(cardPoints)
-        # 滑窗大小 n - k
-        winSize = n - k
-        s =sum(cardPoints[:winSize])
-        mi = s
-        for start in range(winSize, n):
-            s += cardPoints[start] - cardPoints[start - winSize]
-            mi = min(mi, s)
-        return sum(cardPoints) - mi
-
-    cardPoints = [96,90,41,82,39,74,64,50,30]
-    k = 8
-    print(maxScore(cardPoints, k))
+    # def maxScore(cardPoints: List[int], k: int) -> int:
+    #     n = len(cardPoints)
+    #     # 滑窗大小 n - k
+    #     winSize = n - k
+    #     s =sum(cardPoints[:winSize])
+    #     mi = s
+    #     for start in range(winSize, n):
+    #         s += cardPoints[start] - cardPoints[start - winSize]
+    #         mi = min(mi, s)
+    #     return sum(cardPoints) - mi
+    #
+    # cardPoints = [96,90,41,82,39,74,64,50,30]
+    # k = 8
+    # print(maxScore(cardPoints, k))
 
     # def equalSubstring(s: str, t: str, maxCost: int) -> int:
     #     n = len(s)
