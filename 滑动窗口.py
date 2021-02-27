@@ -1,18 +1,79 @@
 import bisect
+import collections
 from itertools import accumulate
 from typing import List
 
 if __name__ == '__main__':
-    def subarraysWithKDistinct(A: List[int], K: int) -> int:
-        n = len(A)
-        # for left in range(n):
-        #     right
-        print(A[1:2])
+
+    def longestSubstring(s: str, k: int) -> int:
+        res = left = right = 0
+        while right < len(s):
+            if s[right] != s[left]:
+                if right - left >= k:
+                    res += right - left
+                left = right
+            right += 1
+        if right - left >= k:
+            res += right - left
+        return res
 
 
-    A = [1, 2, 1, 3, 4]
-    K = 3
-    print(subarraysWithKDistinct(A, K))
+    s = "ababbc"
+    k = 2
+    print(longestSubstring(s, k))
+
+    # K连续位的最小翻转次数（困难） https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/
+    # def minKBitFlips(self, A: List[int], K: int) -> int:
+    #     N = len(A)
+    #     que = collections.deque()
+    #     res = 0
+    #     for i in range(N):
+    #         if que and i >= que[0] + K:
+    #             que.popleft()
+    #         if len(que) % 2 == A[i]:
+    #             if i +  K > N: return -1
+    #             que.append(i)
+    #             res += 1
+    #     return res
+
+    # 滑窗 字典。python使用counter  https://leetcode-cn.com/problems/permutation-in-string/submissions/
+    # 使用字典可以忽略字符先后顺序
+    # def checkInclusion(s1: str, s2: str) -> bool:
+    #     # 统计s1中各字符出现次数
+    #     counter1 = collections.Counter(s1)
+    #     left, right = 0, len(s1) - 1
+    #     # right此时没包括入内
+    #     counter2 = collections.Counter(s2[left: right])
+    #     while right < len(s2):
+    #         # 加入right
+    #         counter2[s2[right]] += 1
+    #         if counter1 == counter2:
+    #             return True
+    #         # 将left 次数减一
+    #         counter2[s2[left]] -= 1
+    #         if counter2[s2[left]] == 0:
+    #             del counter2[s2[left]]
+    #
+    #         left += 1
+    #         right += 1
+    #     return False
+    #
+    #
+    #
+    # s1 = "adc"
+    # s2 = "dcda"
+    # print(checkInclusion(s1, s2))
+
+    # def subarraysWithKDistinct(A: List[int], K: int) -> int:
+    #     n = len(A)
+    #     # for left in range(n):
+    #     #     right
+    #     print(A[1:2])
+    #
+    #
+    # A = [1, 2, 1, 3, 4]
+    # K = 3
+    # print(subarraysWithKDistinct(A, K))
     # def maxTurbulenceSize(arr: List[int]) -> int:
     #     res, n = 2, len(arr)
     #     if n < 3:
