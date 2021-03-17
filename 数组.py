@@ -2,24 +2,51 @@ from typing import List
 from sortedcontainers import SortedList
 
 if __name__ == '__main__':
-    # https://leetcode-cn.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/
-    # 子数组的差值不超过limit。 关键字： 子数组 -> 滑窗
 
-    def longestSubarray(nums: List[int], limit: int) -> int:
-        que = SortedList()
-        left = res = 0
-        for right, num in enumerate(nums):
-            que.add(num)
-            if que[-1] - que[0] > limit:
-                que.remove(nums[left])
-                left += 1
-            res = max(res, right - left + 1)
-        return res
+    def generateMatrix(n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        num = 1
+        left, right, top, bottom = 0, n - 1, 0, n - 1
+        while left <= right and top <= bottom:
+            for y in range(left, right + 1):
+                matrix[top][y] = num
+                num += 1
+            for x in range(top + 1, bottom + 1):
+                matrix[x][right] = num
+                num += 1
+            if left < right and top < bottom:
+                for y in range(right - 1, left, -1):
+                    matrix[bottom][y] = num
+                    num += 1
+                for x in range(bottom, top, -1):
+                    matrix[x][left] = num
+                    num += 1
+            left += 1
+            right -= 1
+            top += 1
+            bottom -= 1
 
-
-    nums = [10, 1, 2, 4, 7, 2]
-    limit = 5
-    print(longestSubarray(nums, limit))
+        return matrix
+    print(generateMatrix(3))
+    #
+    # # https://leetcode-cn.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/
+    # # 子数组的差值不超过limit。 关键字： 子数组 -> 滑窗
+    #
+    # def longestSubarray(nums: List[int], limit: int) -> int:
+    #     que = SortedList()
+    #     left = res = 0
+    #     for right, num in enumerate(nums):
+    #         que.add(num)
+    #         if que[-1] - que[0] > limit:
+    #             que.remove(nums[left])
+    #             left += 1
+    #         res = max(res, right - left + 1)
+    #     return res
+    #
+    #
+    # nums = [10, 1, 2, 4, 7, 2]
+    # limit = 5
+    # print(longestSubarray(nums, limit))
 
     # def findMaxConsecutiveOnes(nums: List[int]) -> int:
     #     maxCount = 0
