@@ -1,23 +1,49 @@
 from typing import List
 
 if __name__ == '__main__':
-    # 动规矩阵 https://leetcode-cn.com/problems/distinct-subsequences/submissions/
-    # 行t,列s
-    # s[i] == t[j]: dp[i - 1][j - 1] + dp[i - 1][j] // dp[i - 1][j] 表示t[j]历史匹配次数， dp[i - 1][j - 1] 表示t[j]之前字母匹配成功次数。两次累加代表t[:j]目前匹配的次数
-    # s[i] != t[j]: dp[i - 1][j]  //当前匹配失败，继承历史即可
-    def numDistinct(s: str, t: str) -> int:
-        dp = [[0] * (len(t) + 1) for _ in range(len(s) + 1)]
-        for i in range(len(s) + 1):
-            dp[i][0] = 1
 
-        for i in range(1, len(s) + 1):
-            for j in range(1, len(t) + 1):
-                if s[i - 1] == t[j - 1]:
-                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]
-                else:
-                    dp[i][j] = dp[i - 1][j]
+    def isMatch(s: str, p: str) -> bool:
+        for i in range(1, 1):
+            print(i)
+        dp = [[False] * (len(s) + 1) for _ in range(len(p) + 1)]
+        # 初始化dp矩阵
+        dp[0][0] = True
+        for i in range(1, len(p) + 1):
+            isStart = False
+            for j in range(1, len(s) + 1):
+                if p[i - 1] == '*':
+                    # 当第一个匹配符是*
+                    if dp[i - 1][0]:
+                        dp[i] = [True] * (len(s) + 1)
+                    # 当*在其他位置
+                    if dp[i - 1][j]:
+                        isStart = True
+                    if isStart:
+                        dp[i][j] = True
+                # 当匹配成功时，从左上角转移状态
+                if p[i - 1] == '?' or p[i - 1] == s[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1]
         print(dp)
-        return dp[-1][-1]
+        return dp[len(p)][len(s)]
+    print(isMatch("zacabz", "*a?b*"))
+
+    # # 动规矩阵 https://leetcode-cn.com/problems/distinct-subsequences/submissions/
+    # # 行t,列s
+    # # s[i] == t[j]: dp[i - 1][j - 1] + dp[i - 1][j] // dp[i - 1][j] 表示t[j]历史匹配次数， dp[i - 1][j - 1] 表示t[j]之前字母匹配成功次数。两次累加代表t[:j]目前匹配的次数
+    # # s[i] != t[j]: dp[i - 1][j]  //当前匹配失败，继承历史即可
+    # def numDistinct(s: str, t: str) -> int:
+    #     dp = [[0] * (len(t) + 1) for _ in range(len(s) + 1)]
+    #     for i in range(len(s) + 1):
+    #         dp[i][0] = 1
+    #
+    #     for i in range(1, len(s) + 1):
+    #         for j in range(1, len(t) + 1):
+    #             if s[i - 1] == t[j - 1]:
+    #                 dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]
+    #             else:
+    #                 dp[i][j] = dp[i - 1][j]
+    #     print(dp)
+    #     return dp[-1][-1]
 
     # # 按摩师问题。创建二维动规矩阵
     # # dp[i][0] 代表第i天不接受的最大时长

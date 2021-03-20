@@ -1,26 +1,47 @@
-if __name__ == '__main__':
-    def isValidSerialization( preorder: str) -> bool:
-        token = '*'
-        stack = [token]
-        preorder = preorder.split(',')
+from typing import List
 
-        for e in preorder:
-            if e.isdigit():
-                if stack:
-                    stack.pop()
-                    stack.append(token)
-                    stack.append(token)
-                else:
-                    return False
+if __name__ == '__main__':
+    def evalRPN(tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token not in '+-*/':
+                stack.append(int(token))
             else:
-                if stack:
-                    stack.pop()
-                else:
-                    return False
-        if stack:
-            return False
-        return True
-    print(isValidSerialization("9,3,4,#,#,1,#,#,2,#,6,#,#"))
+                b, a = stack.pop(), stack.pop()
+                if token == '+':
+                    stack.append(a + b)
+                elif token == '-':
+                    stack.append(a - b)
+                elif token == '*':
+                    stack.append(a * b)
+                elif token == '/':
+                    stack.append(int(a / b))
+        return stack.pop()
+
+    print(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
+
+    # def isValidSerialization( preorder: str) -> bool:
+    #     token = '*'
+    #     stack = [token]
+    #     preorder = preorder.split(',')
+    #
+    #     for e in preorder:
+    #         if e.isdigit():
+    #             if stack:
+    #                 stack.pop()
+    #                 stack.append(token)
+    #                 stack.append(token)
+    #             else:
+    #                 return False
+    #         else:
+    #             if stack:
+    #                 stack.pop()
+    #             else:
+    #                 return False
+    #     if stack:
+    #         return False
+    #     return True
+    # print(isValidSerialization("9,3,4,#,#,1,#,#,2,#,6,#,#"))
     # def calculate(s: str) -> int:
     #     num = 0
     #     op = '+'
