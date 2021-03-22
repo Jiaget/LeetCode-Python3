@@ -2,7 +2,6 @@ from typing import List
 import heapq
 
 if __name__ == '__main__':
-    # 积压订单。
     # 性能优化：1. 不要使用排序，使用最小堆heapq
     #         2. 订单数为0要及时出栈，不要占据空间浪费性能。
     def getNumberOfBacklogOrders(self, orders: List[List[int]]) -> int:

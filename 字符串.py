@@ -1,3 +1,6 @@
+import heapq
+
+
 class Solution:
     # 字符串相加
     def addStr(self, num1, num2):
@@ -35,7 +38,6 @@ class Solution:
             toAdd = "".join(toAdd[::-1])
             res = self.addStr(res, toAdd)
         return res
-
 
 solution = Solution()
 num1 = "2"

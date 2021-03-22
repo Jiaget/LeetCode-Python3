@@ -5,22 +5,44 @@ from typing import List
 
 if __name__ == '__main__':
 
-    def longestSubstring(s: str, k: int) -> int:
-        res = left = right = 0
-        while right < len(s):
-            if s[right] != s[left]:
-                if right - left >= k:
-                    res += right - left
-                left = right
-            right += 1
-        if right - left >= k:
-            res += right - left
+    def maxValue( n: int, index: int, maxSum: int) -> int:
+        res = 1
+        left, right = index, index
+        # 初始化数组后的剩余数
+        rest = maxSum - n
+        # 当两个指针均到达边界，可以直接计算能分配多少，不必一步一步计算浪费时间
+        while left > 0 or right < n - 1:
+            # 左右指针的区间即是每一轮分配的个数（每一位均分配1）
+            span = right - left + 1
+            if rest >= span:
+                # 存货充沛，直接分配,指针向两边移动
+                res += 1
+                rest -= span
+                # 指针移动到边界时，不再移动
+                left = left - 1 if left > 0 else 0
+                right = right + 1 if right < n - 1 else n - 1
+            else:
+                # 存货不够了，可以直接的答案，不必继续
+                break
+        res += rest // n
         return res
-
-
-    s = "ababbc"
-    k = 2
-    print(longestSubstring(s, k))
+    print(maxValue(6,1,10))
+    # def longestSubstring(s: str, k: int) -> int:
+    #     res = left = right = 0
+    #     while right < len(s):
+    #         if s[right] != s[left]:
+    #             if right - left >= k:
+    #                 res += right - left
+    #             left = right
+    #         right += 1
+    #     if right - left >= k:
+    #         res += right - left
+    #     return res
+    #
+    #
+    # s = "ababbc"
+    # k = 2
+    # print(longestSubstring(s, k))
 
     # K连续位的最小翻转次数（困难） https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/
     # def minKBitFlips(self, A: List[int], K: int) -> int:

@@ -15,11 +15,44 @@ def backtrack(未探索区域, res, path):
 
 """
 
+# def permute(nums):
+#     """
+#     :type nums: List[int]
+#     :rtype: List[List[int]]
+#     """
+#
+#     def backtrack(first=0):
+#         # 所有数都填完了
+#         if first == n:
+#             print(nums)
+#             res.append(nums[:])
+#         for i in range(first, n):
+#             # 动态维护数组
+#             nums[first], nums[i] = nums[i], nums[first]
+#             print(i, nums)
+#             # 继续递归填下一个数
+#             backtrack(first + 1)
+#             # 撤销操作
+#             nums[first], nums[i] = nums[i], nums[first]
+#
+#     n = len(nums)
+#     res = []
+#     backtrack()
+#     return res
+#
+#
+# print(permute([1, 2, 3]))
 
-isPalindrome = lambda a : s == s[::-1]
-print(isPalindrome([1,2,1]))
-
-from typing import List
+# def permute(nums: List[int]) -> List[List[int]]:
+#     def backtrack(未探索区域, res, path):
+#         if 未探索区域满足结束条件:
+#             res.add(path)  # 深度拷贝
+#             return
+#         for 选择 in 未探索区域当前可能的选择:
+#             if 当前选择符合要求:
+#                 path.add(当前选择)
+#                 backtrack(新的未探索区域, res, path)
+#                 path.pop()
 
 # # 回溯：
 # # 回溯的递归过程中会出现多个支线，在这些支线中会存在成功与失败，回溯要在出现失败的时候回溯到上一个状态。
